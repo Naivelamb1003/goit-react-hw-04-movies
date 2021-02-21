@@ -1,8 +1,7 @@
 import { Component } from "react";
 import style from "./App.module.css";
-// import Modal from "./components/ Modal/ Modal";
-import Searchbar from "./components/Searchbar/Searchbar";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
+import  {Router } from 'react-router-dom';
+
 
 class App extends Component {
   state = {
