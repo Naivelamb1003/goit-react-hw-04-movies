@@ -1,28 +1,27 @@
 import { Component } from "react";
 import style from "./App.module.css";
-import  {Router } from 'react-router-dom';
+import  { Route, Switch } from 'react-router-dom';
+import HomePage from "./components/HomePage/HomePage";
+import MoviesPage from "./components/MoviesPage/MoviesPage";
+import MovieDetailsPage from "./components/MovieDetailsPage/MovieDetailsPage";
+import Cast from "./components/Cast/Cast";
+import Reviews from "./components/Reviews/Reviews";
+import NotFoundViews from "./views/NotFoundViews";
 
 
-class App extends Component {
-  state = {
-    searchQuery: "",
-  };
+const App =() =>(
+  <>
+  <Switch>
 
-  onSubmit = (searchQueryState) => {
-    this.setState({
-      searchQuery: searchQueryState.searchQuery,
-    });
-  };
-
-  render() {
-    return (
-      <>
-        <Searchbar onSubmit={this.onSubmit} />
-
-        <ImageGallery searchQuery={this.state.searchQuery} />
-      </>
-    );
-  }
-}
+    <Route exact path="/" component={HomePage} />
+    <Route exact path="/movies" component={MoviesPage} />
+    <Route path="/movies/:movieId" component={MovieDetailsPage} />
+    <Route path="/movies/:movieId/cast" component={Cast} />
+    <Route path="/movies/:movieId/reviews" component={Reviews} />
+    <Route  component={NotFoundViews} />
+  </Switch>
+    
+  </>
+)
 
 export default App;

@@ -1,0 +1,59 @@
+import API from "../../services/API";
+import React, { Component } from "react";
+import s from "./MoviesDetailsPage.module.css";
+
+class MoviesDetailsPage extends Component {
+  state = {
+    posterPath: null,
+    title: null,
+    overview: null,
+    userScore: null,
+    genres: null,
+    date: null,
+  };
+
+  async componentDidMount() {
+    const { movieId } = this.props.match.params;
+
+    const response = await API.fetchMovieId(movieId);
+    console.log(response);
+    const json = await response.json();
+    this.setState({
+      posterPath: json.poster_path,
+      title: json.title,
+      overview: json.overview,
+      userScore: json.vote_average,
+      genres: json.genres,
+      date: json.release_date,
+    });
+  }
+  render() {
+    const { posterPath, title, overview, userScore, genres, date } = this.state;
+    const postURL = `https://image.tmdb.org/t/p/w400${posterPath}`;
+    return (
+      <>
+      <div>
+          <div className={s.imgConainer}>
+            <img src={postURL} alt={title} />
+          </div>
+                <div className={s.infocontainer}>
+          <h2>{title}</h2>
+          <p className={s.text}>User score: {userScore * 10}%</p>
+          <h3>Overview</h3>
+          <p className={s.text}>{overview}</p>
+          <h3>Genres</h3>
+          {genres &&
+            genres.map((genre) => (
+              <p className={s.textGenre} key={genre.id}>
+                {genre.name}
+              </p>
+            ))}
+        </div>
+      </div>
+      
+      </>
+    );
+  }
+}
+
+export default MoviesDetailsPage;

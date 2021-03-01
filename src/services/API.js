@@ -13,7 +13,7 @@ const APIKEY = "51b343e5ab428fce05c272eacf93961e";
 
  const fetchSearch = query => {
   return fetch (
-   `${URL}/search/movie?api_key=${APIKEY}&language=en-US&page=1&query=${query}`,
+   `${URL}search/movie?api_key=${APIKEY}&language=en-US&page=1&query=${query}`,
    
   )
  
@@ -21,19 +21,19 @@ const APIKEY = "51b343e5ab428fce05c272eacf93961e";
 
 const fetchMovieId = async movieId =>{
   return fetch (
-    `${URL}/movie/${movieId}?api_key=${APIKEY}&language=en-US`,
+    `${URL}movie/${movieId}?api_key=${APIKEY}&language=en-US`,
   )
 }
 
 const fetchСredits = async movieId =>{
   return fetch (
-    `${URL}/movie/${movieId}/credits?api_key=${APIKEY}&language=en-US`
+    `${URL}movie/${movieId}/credits?api_key=${APIKEY}&language=en-US`
   )
 }
     
 const fetchReviews = async movieId =>{
   return fetch (
-    `${URL}/movie/${movieId}/reviews?api_key=${APIKEY}&language=en-US&page=1`
+    `${URL}movie/${movieId}/reviews?api_key=${APIKEY}&language=en-US&page=1`
   )
 }
 
@@ -48,7 +48,7 @@ const fetchAPI = {
 
     
   
-  export default api;
+  export default fetchAPI;
 
 
 
