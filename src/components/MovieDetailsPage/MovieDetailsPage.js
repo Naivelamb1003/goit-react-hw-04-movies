@@ -34,6 +34,7 @@ class MoviesDetailsPage extends Component {
     const { path, url } = this.props.match;
     const movieId = Number(this.props.match.params.movieId);
     const postURL = `https://image.tmdb.org/t/p/w400${posterPath}`;
+
     return (
       <>
         <div>
@@ -64,6 +65,7 @@ class MoviesDetailsPage extends Component {
             return <Cast movieId={movieId} />;
           }}
         />
+        
 
         <Route
           path={`${path}/reviews`}

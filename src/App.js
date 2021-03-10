@@ -1,6 +1,6 @@
 import { Component } from "react";
 import style from "./App.module.css";
-import  { Route, Switch } from 'react-router-dom';
+import  { NavLink, Route, Switch } from 'react-router-dom';
 import HomePage from "./components/HomePage/HomePage";
 import MoviesPage from "./components/MoviesPage/MoviesPage";
 import MovieDetailsPage from "./components/MovieDetailsPage/MovieDetailsPage";
@@ -10,7 +10,13 @@ import NotFoundViews from "./views/NotFoundViews";
 
 
 const App =() =>(
-  <>
+    <>
+    <header className>
+<nav className>
+<NavLink exact to="/">Home</NavLink>
+<NavLink  to="/movies">Movies</NavLink>
+</nav>
+    </header>
   <Switch>
 
     <Route exact path="/" component={HomePage} />
