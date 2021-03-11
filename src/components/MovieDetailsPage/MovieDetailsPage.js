@@ -4,6 +4,7 @@ import s from "./MoviesDetailsPage.module.css";
 import { NavLink, Route } from "react-router-dom";
 import Cast from "../Cast/Cast";
 import Reviews from "../Reviews/Reviews";
+import routes from "../routes";
 
 class MoviesDetailsPage extends Component {
   state = {
@@ -29,14 +30,25 @@ class MoviesDetailsPage extends Component {
       date: json.release_date,
     });
   }
+
+  goBack = () => {
+    if(this.props.location.state && this.props.location.state.from) {
+      return this.props.history.push(this.props.location.state.from);
+    }
+    return this.props.history.push(routes.home);
+    
+  };
+
   render() {
-    const { posterPath, title, overview, userScore, genres, date } = this.state;
+    const { posterPath, title, overview, userScore, genres } = this.state;
     const { path, url } = this.props.match;
     const movieId = Number(this.props.match.params.movieId);
     const postURL = `https://image.tmdb.org/t/p/w400${posterPath}`;
 
     return (
       <>
+        <button onClick={this.goBack}>Go back</button>
+
         <div>
           <div className={s.imgConainer}>
             <img src={postURL} alt={title} />
@@ -65,7 +77,6 @@ class MoviesDetailsPage extends Component {
             return <Cast movieId={movieId} />;
           }}
         />
-        
 
         <Route
           path={`${path}/reviews`}

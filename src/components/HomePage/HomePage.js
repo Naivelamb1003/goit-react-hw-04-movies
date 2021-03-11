@@ -1,7 +1,6 @@
-import axios from "axios";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import API from "../../services/API";
+import MovieList from "../../views/MovieList/MovieList";
 
 class HomePage extends Component {
   state = {
@@ -25,13 +24,7 @@ class HomePage extends Component {
     return (
       <>
         <h1>Начальная страница</h1>
-        <ul>
-          {this.state.films.map((film) => (
-            <li key={film.id}>
-              <Link to={`/movies/${film.id}`}>{film.title}</Link>
-            </li>
-          ))}
-        </ul>
+        <MovieList films = {this.state.films} />
       </>
     );
   }

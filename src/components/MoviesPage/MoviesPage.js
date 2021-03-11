@@ -5,7 +5,7 @@ import queryString from "query-string";
 
 import api from "../../services/API";
 import Searchbar from "../Searchbar/Searchbar";
-import  { NavLink } from 'react-router-dom';
+import MovieList from "../../views/MovieList/MovieList";
 
 
 class MoviesPage extends Component {
@@ -60,22 +60,8 @@ class MoviesPage extends Component {
     return (
       <>
         <Searchbar onSubmit={this.addSearch} />
-
         {results && (
-          <ul>
-            {results.map(({ id, title }) => (
-              <li key={id}>
-                <NavLink
-                  to={{
-                    pathname: `/movies/${id}`,
-                    state: { from: this.props.location },
-                  }}
-                >
-                  {title}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+            <MovieList films = {results} />
         )}
       </>
     );

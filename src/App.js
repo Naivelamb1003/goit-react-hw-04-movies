@@ -1,33 +1,30 @@
-import { Component } from "react";
-import style from "./App.module.css";
-import  { NavLink, Route, Switch } from 'react-router-dom';
-import HomePage from "./components/HomePage/HomePage";
-import MoviesPage from "./components/MoviesPage/MoviesPage";
-import MovieDetailsPage from "./components/MovieDetailsPage/MovieDetailsPage";
-import Cast from "./components/Cast/Cast";
-import Reviews from "./components/Reviews/Reviews";
+import { lazy, Suspense } from "react";
+import { Route, Switch } from "react-router-dom";
 import NotFoundViews from "./views/NotFoundViews";
+import routes from "./components/routes";
+import AppBar from "./components/AppBar/AppBar";
+
+const HomePage = lazy(() => import("./components/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("./components/MoviesPage/MoviesPage"))
+const MovieDetailsPage = lazy(() => import("./components/MovieDetailsPage/MovieDetailsPage"));
+const Cast = lazy(() => import("./components/Cast/Cast"));
+const Reviews = lazy(() => import("./components/Reviews/Reviews"));
 
 
-const App =() =>(
-    <>
-    <header className>
-<nav className>
-<NavLink exact to="/">Home</NavLink>
-<NavLink  to="/movies">Movies</NavLink>
-</nav>
-    </header>
-  <Switch>
-
-    <Route exact path="/" component={HomePage} />
-    <Route exact path="/movies" component={MoviesPage} />
-    <Route path="/movies/:movieId" component={MovieDetailsPage} />
-    <Route path="/movies/:movieId/cast" component={Cast} />
-    <Route path="/movies/:movieId/reviews" component={Reviews} />
-    <Route  component={NotFoundViews} />
-  </Switch>
-    
+const App = () => (
+  <>
+    <AppBar />
+    <Suspense fallback = {<h1>Loading...</h1>}>
+      <Switch>
+        <Route exact path={routes.home} component={HomePage} />
+        <Route exact path={routes.movies} component={MoviesPage} />
+        <Route path={routes.details} component={MovieDetailsPage} />
+        <Route path={routes.cast} component={Cast} />
+        <Route path={routes.reviews} component={Reviews} />
+        <Route component={NotFoundViews} />
+      </Switch>
+    </Suspense>
   </>
-)
+);
 
 export default App;

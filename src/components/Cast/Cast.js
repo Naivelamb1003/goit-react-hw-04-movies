@@ -1,7 +1,5 @@
-import { render } from "@testing-library/react";
 import React, { Component } from "react";
 import API from "../../services/API";
-import s from "./Cast.module.css";
 
 class Cast extends Component {
   state = {
