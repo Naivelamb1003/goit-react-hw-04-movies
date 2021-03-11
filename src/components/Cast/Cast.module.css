@@ -1,5 +1,5 @@
 .list {
-    width: 1600px;
+    width: auto;
     display: flex;
     list-style-type: none;
     flex-wrap: wrap;

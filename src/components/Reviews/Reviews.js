@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../services/API";
-import s from "./Reviews.module.css";
+import style from "./Reviews.module.css";
 
 class Reviews extends Component {
   state = {
@@ -30,10 +30,10 @@ class Reviews extends Component {
     return (
       <>
         {!error && (
-          <ul className={s.list}>
+          <ul className={style.list}>
             {results.map((result) => (
-              <li key={result.id} className={s.item}>
-                <p className={s.title}>Author: {result.author}</p>
+              <li key={result.id} className={style.item}>
+                <p className={style.title}>Author: {result.author}</p>
                 <p>{result.content}</p>
               </li>
             ))}

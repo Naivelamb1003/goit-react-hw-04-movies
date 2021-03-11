@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { toast } from 'react-toastify';
-import s from './Searchbar.module.css';
+import style from './Searchbar.module.css';
 
 class Searchbar extends Component {
   state = {
@@ -29,16 +29,16 @@ class Searchbar extends Component {
 
   render() {
     return (
-      <form className={s.SearchForm} onSubmit={this.handleSubmit}>
+      <form className={style.SearchForm} onSubmit={this.handleSubmit}>
         <input
-          className={s.SearchFormInput}
+          className={style.SearchFormInput}
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
           onChange={this.handleChangeSearch}
         />
-        <button type="submit" className={s.SearchFormButton}>
+        <button type="submit" className={style.SearchFormButton}>
           <BsSearch style={{ color: 'white' }} />
         </button>
       </form>

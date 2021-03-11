@@ -1,6 +1,6 @@
 import API from "../../services/API";
 import React, { Component } from "react";
-import s from "./MoviesDetailsPage.module.css";
+import style from "./MoviesDetailsPage.module.css";
 import { NavLink, Route } from "react-router-dom";
 import Cast from "../Cast/Cast";
 import Reviews from "../Reviews/Reviews";
@@ -47,29 +47,29 @@ class MoviesDetailsPage extends Component {
 
     return (
       <>
-        <button onClick={this.goBack}>Go back</button>
+        <button onClick={this.goBack} className={style.btn}>Go back</button>
 
-        <div>
-          <div className={s.imgConainer}>
+        <div className={style.container}>
+          <div className={style.imgConainer}>
             <img src={postURL} alt={title} />
           </div>
-          <div className={s.infocontainer}>
+          <div className={style.infocontainer}>
             <h2>{title}</h2>
-            <p className={s.text}>User score: {userScore * 10}%</p>
+            <p className={style.text}>User score: {userScore * 10}%</p>
             <h3>Overview</h3>
-            <p className={s.text}>{overview}</p>
+            <p className={style.text}>{overview}</p>
             <h3>Genres</h3>
             {genres &&
               genres.map((genre) => (
-                <p className={s.textGenre} key={genre.id}>
+                <p className={style.textGenre} key={genre.id}>
                   {genre.name}
                 </p>
               ))}
           </div>
         </div>
 
-        <NavLink to={`${url}/cast`}>Актерский состав</NavLink>
-        <NavLink to={`${url}/reviews`}>Доп информация</NavLink>
+        <NavLink to={`${url}/cast`} className={style.NavLink} activeClassName={style.NavLinkActive}>Актерский состав</NavLink>
+        <NavLink to={`${url}/reviews` } className={style.NavLink} activeClassName={style.NavLinkActive}>Доп информация</NavLink>
 
         <Route
           path={`${path}/cast`}
