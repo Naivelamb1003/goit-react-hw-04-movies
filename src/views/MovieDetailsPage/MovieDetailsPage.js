@@ -42,6 +42,7 @@ class MoviesDetailsPage extends Component {
     const { path, url } = this.props.match;
     const movieId = Number(this.props.match.params.movieId);
     const postURL = `https://image.tmdb.org/t/p/w400${posterPath}`;
+    const fromUrl = this.props.location.state ? this.props.location.state.from : routes.home;
 
     return (
       <>
@@ -71,7 +72,7 @@ class MoviesDetailsPage extends Component {
         <NavLink
           to={{
             pathname: `${url}/cast`,
-            state: { from: this.props.location.state.from },
+            state: { from: fromUrl },
           }}
           className={style.NavLink}
           activeClassName={style.NavLinkActive}
@@ -81,7 +82,7 @@ class MoviesDetailsPage extends Component {
         <NavLink
           to={{
             pathname: `${url}/reviews`,
-            state: { from: this.props.location.state.from },
+            state: { from: fromUrl },
           }}
           className={style.NavLink}
           activeClassName={style.NavLinkActive}
