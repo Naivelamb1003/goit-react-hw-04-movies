@@ -32,7 +32,7 @@ class Cast extends Component {
         {cast &&
           cast.map((actor) => (
             <li className={style.item}>
-              <img src={actor.profile_path ? profile_url + actor.profile_path : no_avatar_url} className={style.img} />
+              <img src={actor.profile_path ? profile_url + actor.profile_path : no_avatar_url} alt="face" className={style.img} />
               <p>{actor.name}</p>
             </li>
           ))}
