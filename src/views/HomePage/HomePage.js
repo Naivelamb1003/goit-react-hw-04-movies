@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../services/API";
-import MovieList from "../../views/MovieList/MovieList";
+import MovieList from "../../components/MovieList/MovieList";
 
 class HomePage extends Component {
   state = {
@@ -8,16 +8,8 @@ class HomePage extends Component {
   };
 
   async componentDidMount() {
-    try {
       const response = await API.fetchTrending();
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      const json = await response.json();
-      this.setState({ films: json.results });
-    } catch (error) {
-      console.log(error);
-    }
+      this.setState({ films: response.results });
   }
 
   render() {

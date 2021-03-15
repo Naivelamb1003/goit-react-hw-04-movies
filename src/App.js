@@ -4,9 +4,9 @@ import NotFoundViews from "./views/NotFoundViews";
 import routes from "./components/routes";
 import AppBar from "./components/AppBar/AppBar";
 
-const HomePage = lazy(() => import("./components/HomePage/HomePage"));
-const MoviesPage = lazy(() => import("./components/MoviesPage/MoviesPage"))
-const MovieDetailsPage = lazy(() => import("./components/MovieDetailsPage/MovieDetailsPage"));
+const HomePage = lazy(() => import("./views/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("./views/MoviesPage/MoviesPage"))
+const MovieDetailsPage = lazy(() => import("./views/MovieDetailsPage/MovieDetailsPage"));
 const Cast = lazy(() => import("./components/Cast/Cast"));
 const Reviews = lazy(() => import("./components/Reviews/Reviews"));
 

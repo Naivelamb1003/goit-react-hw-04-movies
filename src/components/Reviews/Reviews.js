@@ -12,16 +12,15 @@ class Reviews extends Component {
     const { movieId } = this.props;
 
     const response = await API.fetchReviews(movieId);
-    const json = await response.json();
-    console.log(json);
-      if (json.results.lenght === 0) {
+
+      if (response.results.lenght === 0) {
         this.setState({
           massange: "No Revievs",
           error: true,
         });
       }
       this.setState({
-        results: json.results.slice(0, 5),
+        results: response.results.slice(0, 5),
       });
     }
 

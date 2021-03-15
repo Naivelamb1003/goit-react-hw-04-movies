@@ -2,9 +2,9 @@ import API from "../../services/API";
 import React, { Component } from "react";
 import style from "./MoviesDetailsPage.module.css";
 import { NavLink, Route } from "react-router-dom";
-import Cast from "../Cast/Cast";
-import Reviews from "../Reviews/Reviews";
-import routes from "../routes";
+import Cast from "../../components/Cast/Cast";
+import Reviews from "../../components/Reviews/Reviews";
+import routes from "../../components/routes";
 
 class MoviesDetailsPage extends Component {
   state = {
@@ -20,23 +20,21 @@ class MoviesDetailsPage extends Component {
     const { movieId } = this.props.match.params;
 
     const response = await API.fetchMovieId(movieId);
-    const json = await response.json();
     this.setState({
-      posterPath: json.poster_path,
-      title: json.title,
-      overview: json.overview,
-      userScore: json.vote_average,
-      genres: json.genres,
-      date: json.release_date,
+      posterPath: response.poster_path,
+      title: response.title,
+      overview: response.overview,
+      userScore: response.vote_average,
+      genres: response.genres,
+      date: response.release_date,
     });
   }
 
   goBack = () => {
-    if(this.props.location.state && this.props.location.state.from) {
+    if (this.props.location.state && this.props.location.state.from) {
       return this.props.history.push(this.props.location.state.from);
     }
     return this.props.history.push(routes.home);
-    
   };
 
   render() {
@@ -47,7 +45,9 @@ class MoviesDetailsPage extends Component {
 
     return (
       <>
-        <button onClick={this.goBack} className={style.btn}>Go back</button>
+        <button onClick={this.goBack} className={style.btn}>
+          Go back
+        </button>
 
         <div className={style.container}>
           <div className={style.imgConainer}>
@@ -68,8 +68,26 @@ class MoviesDetailsPage extends Component {
           </div>
         </div>
 
-        <NavLink to={`${url}/cast`} className={style.NavLink} activeClassName={style.NavLinkActive}>Актерский состав</NavLink>
-        <NavLink to={`${url}/reviews` } className={style.NavLink} activeClassName={style.NavLinkActive}>Доп информация</NavLink>
+        <NavLink
+          to={{
+            pathname: `${url}/cast`,
+            state: { from: this.props.location.state.from },
+          }}
+          className={style.NavLink}
+          activeClassName={style.NavLinkActive}
+        >
+          Актерский состав
+        </NavLink>
+        <NavLink
+          to={{
+            pathname: `${url}/reviews`,
+            state: { from: this.props.location.state.from },
+          }}
+          className={style.NavLink}
+          activeClassName={style.NavLinkActive}
+        >
+          Доп информация
+        </NavLink>
 
         <Route
           path={`${path}/cast`}

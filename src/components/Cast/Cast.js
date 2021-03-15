@@ -12,10 +12,9 @@ class Cast extends Component {
     const { movieId } = this.props;
 
     const response = await API.fetchСredits(movieId);
-    const json = await response.json();
 
     this.setState({
-      cast: json.cast.slice(0, 5),
+      cast: response.cast.slice(0, 5),
     });
   }
 
