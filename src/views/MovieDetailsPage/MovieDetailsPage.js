@@ -2,9 +2,11 @@ import API from "../../services/API";
 import React, { Component } from "react";
 import style from "./MoviesDetailsPage.module.css";
 import { NavLink, Route } from "react-router-dom";
-import Cast from "../../components/Cast/Cast";
-import Reviews from "../../components/Reviews/Reviews";
+import { lazy, Suspense } from "react";
 import routes from "../../components/routes";
+
+const Cast = lazy(() => import("../../components/Cast/Cast"));
+const Reviews = lazy(() => import("../../components/Reviews/Reviews"));
 
 class MoviesDetailsPage extends Component {
   state = {
@@ -19,15 +21,19 @@ class MoviesDetailsPage extends Component {
   async componentDidMount() {
     const { movieId } = this.props.match.params;
 
-    const response = await API.fetchMovieId(movieId);
-    this.setState({
-      posterPath: response.poster_path,
-      title: response.title,
-      overview: response.overview,
-      userScore: response.vote_average,
-      genres: response.genres,
-      date: response.release_date,
-    });
+    try {
+      const response = await API.fetchMovieId(movieId);
+      this.setState({
+        posterPath: response.poster_path,
+        title: response.title,
+        overview: response.overview,
+        userScore: response.vote_average,
+        genres: response.genres,
+        date: response.release_date,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   goBack = () => {
@@ -42,7 +48,9 @@ class MoviesDetailsPage extends Component {
     const { path, url } = this.props.match;
     const movieId = Number(this.props.match.params.movieId);
     const postURL = `https://image.tmdb.org/t/p/w400${posterPath}`;
-    const fromUrl = this.props.location.state ? this.props.location.state.from : routes.home;
+    const fromUrl = this.props.location.state
+      ? this.props.location.state.from
+      : routes.home;
 
     return (
       <>
@@ -90,19 +98,21 @@ class MoviesDetailsPage extends Component {
           Доп информация
         </NavLink>
 
-        <Route
-          path={`${path}/cast`}
-          render={() => {
-            return <Cast movieId={movieId} />;
-          }}
-        />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Route
+            path={`${path}/cast`}
+            render={() => {
+              return <Cast movieId={movieId} />;
+            }}
+          />
 
-        <Route
-          path={`${path}/reviews`}
-          render={() => {
-            return <Reviews movieId={movieId} />;
-          }}
-        />
+          <Route
+            path={`${path}/reviews`}
+            render={() => {
+              return <Reviews movieId={movieId} />;
+            }}
+          />
+        </Suspense>
       </>
     );
   }

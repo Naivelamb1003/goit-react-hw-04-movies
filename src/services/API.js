@@ -9,6 +9,7 @@ const errorWrap = async (fetchResult) => {
     }
     return await result.json();
   } catch (error) {
+    console.log("Connection error");
     console.log(error);
   }
 };

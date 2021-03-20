@@ -7,7 +7,6 @@ import api from "../../services/API";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import MovieList from "../../components/MovieList/MovieList";
 
-
 class MoviesPage extends Component {
   state = {
     results: [],
@@ -38,13 +37,17 @@ class MoviesPage extends Component {
   }
 
   async fetcMoviesSearch(search) {
-    const data = await api.fetchSearch(search);
-        console.log(data);
-        console.log(data.results);
+    try {
+      const data = await api.fetchSearch(search);
+      console.log(data);
+      console.log(data.results);
       if (data.total_results === 0) {
         toast.error(`No results were found for ${search}`);
       }
       this.setState({ results: data.results });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   addSearch = (query) => {
@@ -59,9 +62,7 @@ class MoviesPage extends Component {
     return (
       <>
         <Searchbar onSubmit={this.addSearch} />
-        {results && (
-            <MovieList films = {results} />
-        )}
+        {results && <MovieList films={results} />}
       </>
     );
   }

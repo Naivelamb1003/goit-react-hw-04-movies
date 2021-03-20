@@ -8,8 +8,13 @@ class HomePage extends Component {
   };
 
   async componentDidMount() {
+    try{
       const response = await API.fetchTrending();
       this.setState({ films: response.results });
+    } catch(error) {
+      console.log(error);
+    }
+     
   }
 
   render() {

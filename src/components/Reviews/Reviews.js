@@ -10,8 +10,8 @@ class Reviews extends Component {
 
   async componentDidMount() {
     const { movieId } = this.props;
-
-    const response = await API.fetchReviews(movieId);
+    try {
+      const response = await API.fetchReviews(movieId);
 
       if (response.results.lenght === 0) {
         this.setState({
@@ -22,7 +22,10 @@ class Reviews extends Component {
       this.setState({
         results: response.results.slice(0, 5),
       });
+    } catch (error) {
+      console.log(error);
     }
+  }
 
   render() {
     const { results, massange, error } = this.state;
